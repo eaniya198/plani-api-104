@@ -41,7 +41,7 @@ jobs:
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           sed -i "s|<ECR_REPO_URI>|$ECR_REGISTRY/$ECR_REPOSITORY|g" ./taskdef.json
-          sed -i "s|<TAGS>|${$IMAGE_TAG}|g" ./taskdef.json
-          zip -r ${IMAGE_TAG}.zip taskdef.json appspec.yaml
-          aws s3 cp ${IMAGE_TAG} s3://test-sound-pjm/
+          sed -i "s|<TAGS>|$IMAGE_TAG|g" ./taskdef.json
+          zip -r $IMAGE_TAG.zip taskdef.json appspec.yaml
+          aws s3 cp $IMAGE_TAG s3://test-sound-pjm/
           echo "Finished"
