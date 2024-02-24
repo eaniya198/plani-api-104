@@ -1,0 +1,45 @@
+{
+    "containerDefinitions": [
+        {
+            "name": "plani-ecs-container",
+            "image": "<ECR_REPO_URI>:<TAGS>",
+            "cpu": 0,
+            "portMappings": [
+                {
+                    "name": "5000",
+                    "containerPort": 5000,
+                    "hostPort": 5000,
+                    "protocol": "tcp",
+                    "appProtocol": "http"
+                }
+            ],
+            "essential": true,
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-create-group": "true",
+                    "awslogs-group": "/ecs/plani-ecs-task-def",
+                    "awslogs-region": "ap-northeast-2",
+                    "awslogs-stream-prefix": "ecs"
+                },
+                "secretOptions": []
+            }
+        }
+    ],
+    "family": "plani-ecs-task-def",
+    "executionRoleArn": "arn:aws:iam::073762821266:role/ecsTaskExecutionRole",
+    "networkMode": "awsvpc",
+    "compatibilities": [
+        "EC2",
+        "FARGATE"
+    ],
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "cpu": "512",
+    "memory": "1024",
+    "runtimePlatform": {
+        "cpuArchitecture": "X86_64",
+        "operatingSystemFamily": "LINUX"
+    }
+}
