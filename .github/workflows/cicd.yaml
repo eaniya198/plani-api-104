@@ -43,5 +43,5 @@ jobs:
           sed -i "s|<ECR_REPO_URI>|$ECR_REGISTRY/$ECR_REPOSITORY|g" ./taskdef.json
           sed -i "s|<TAGS>|$IMAGE_TAG|g" ./taskdef.json
           zip -r $IMAGE_TAG.zip taskdef.json appspec.yaml
-          aws s3 cp $IMAGE_TAG s3://test-sound-pjm/
+          aws s3 cp $IMAGE_TAG.zip s3://test-sound-pjm/
           echo "Finished"
